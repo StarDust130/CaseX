@@ -1,3 +1,4 @@
+import { AnimatedTooltipPreview } from "@/components/AnimatedTooltipPreview";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import { Check } from "lucide-react";
 import Image from "next/image";
@@ -47,41 +48,7 @@ export default function Home() {
               </ul>
               <div className="mt-12 flex flex-col sm:flex-row items-center sm:items-start gap-5">
                 <div className="flex -space-x-4">
-                  <Image
-                    src="/users/user-1.png"
-                    width={100}
-                    height={100}
-                    alt="user image"
-                    className="inline-block h-10 w-10 rounded-full ring-2 ring-slate-100"
-                  />
-                  <Image
-                    src="/users/user-2.png"
-                    width={100}
-                    height={100}
-                    alt="user image"
-                    className="inline-block h-10 w-10 rounded-full ring-2 ring-slate-100"
-                  />
-                  <Image
-                    src="/users/user-3.png"
-                    width={100}
-                    height={100}
-                    alt="user image"
-                    className="inline-block h-10 w-10 rounded-full ring-2 ring-slate-100"
-                  />
-                  <Image
-                    src="/users/user-4.jpg"
-                    width={100}
-                    height={100}
-                    alt="user image"
-                    className="inline-block h-10 w-10 rounded-full ring-2 ring-slate-100"
-                  />
-                  <Image
-                    src="/users/user-5.jpg"
-                    width={100}
-                    height={100}
-                    alt="user image"
-                    className="inline-block h-10 w-10 rounded-full ring-2 ring-slate-100 object-cover"
-                  />
+                  <AnimatedTooltipPreview />
                 </div>
               </div>
             </div>
