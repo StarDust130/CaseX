@@ -3,10 +3,11 @@ import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import Phone from "@/components/Phone";
 import { Check, StarIcon } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="bg-slate-50 ">
+    <div>
       <section>
         <MaxWidthWrapper className="pb-24 pt-10 lg:grid lg:grid-cols-3 sm:pb-32 lg:gap-x-0 xl:gap-x-8 lg:pt-24 xl:pt-32 lg:pb-52 ">
           <div className="col-span-2 px-6 lg:px-0 lg:pt-4 ">
@@ -20,16 +21,19 @@ export default function Home() {
                   className="w-full"
                 />
               </div>
-              <h1 className="relative w-fit tracking-tight text-balance mt-16 font-bold !leading-tight text-gray-900 text-5xl md:text-6xl lg:text-7xl">
+              <h1 className="relative w-fit tracking-tight text-balance mt-16 font-bold !leading-tight  text-5xl md:text-6xl lg:text-7xl">
                 Your Image on a{" "}
-                <span className="bg-green-600 px-2 rounded-3xl text-white ">
-                  Custom
-                </span>
+                <Link href={"/configure/upload"}>
+                  <span className="bg-green-600 px-2 rounded-3xl text-white  ">
+                    Custom
+                  </span>
+                </Link>
                 Phone Case{" "}
               </h1>
               <p className="mt-8 text-lg lg:pr-10 max-w-prose text-center text-balance md:text-wrap ">
                 Capture your favorite moments with your own,{" "}
-                <span className="font-semibold">one-of-one</span> phone case.<br />
+                <span className="font-semibold">one-of-one</span> phone case.
+                <br />
                 <span className="font-semibold">Case</span>
                 <span className="text-green-600 font-semibold">X</span> allows
                 you to protect your memories , not just your phone case.
@@ -42,7 +46,7 @@ export default function Home() {
                   </li>
                   <li className="flex gap-1.5 items-center text-left">
                     <Check className="h-5 w-5 shrink-0 text-green-600 " />5 year
-                    print guarantee 😜
+                    print guarantee 😇
                   </li>
                   <li className="flex gap-1.5 items-center text-left">
                     <Check className="h-5 w-5 shrink-0 text-green-600 " />
