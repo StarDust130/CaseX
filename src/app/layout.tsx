@@ -7,7 +7,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "CaseCobra",
+  title: "CaseX",
   description: "Custom phone cases for your favorite moments",
   icons: {
     icon: "/snake-1.png",
