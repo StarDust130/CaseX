@@ -1,5 +1,6 @@
 import { AnimatedTooltipPreview } from "@/components/AnimatedTooltipPreview";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
+import Phone from "@/components/Phone";
 import { Check, StarIcon } from "lucide-react";
 import Image from "next/image";
 
@@ -71,10 +72,18 @@ export default function Home() {
               <Image
                 src={"/your-image.png"}
                 alt="Your Image"
-                height={100}
                 width={100}
+                height={100}
                 className="absolute w-40 lg:w-52 left-56 -top-20 select-none hidden sm:block lg:hidden xl:block "
               />
+              <Image
+                src={"/line.png"}
+                alt="Your Image"
+                width={100}
+                height={100}
+                className="absolute w-20  -left-6 -bottom-6 select-none"
+              />
+              <Phone className="w-64" imgSrc="/testimonials/1.jpg" />
             </div>
           </div>
         </MaxWidthWrapper>
