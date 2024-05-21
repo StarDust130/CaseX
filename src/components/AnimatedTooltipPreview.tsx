@@ -4,31 +4,31 @@ import { AnimatedTooltip } from "./ui/animated-tooltip";
 const people = [
   {
     id: 1,
-    name: "Priyanka Don",
+    name: "Priyanka Singh",
     designation: "HR",
     image: "/didi.jpg",
   },
   {
     id: 2,
-    name: "Robert Johnson",
+    name: "Jane Sharma",
     designation: "Product Manager",
     image: "/users/user-2.png",
   },
   {
     id: 3,
-    name: "Jane Smith",
+    name: "Emily Yadav",
     designation: "Data Scientist",
     image: "/users/user-3.png",
   },
   {
     id: 4,
-    name: "Emily Davis",
+    name: "Harsh Smith ",
     designation: "UX Designer",
     image: "/users/user-4.jpg",
   },
   {
     id: 5,
-    name: "Tyler Durden",
+    name: "Raju Durden",
     designation: "Soap Developer",
     image: "/users/user-5.jpg",
   },
