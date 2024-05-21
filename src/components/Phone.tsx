@@ -51,10 +51,11 @@ const Phone = ({ imgSrc, className, dark = false, ...props }: PhoneProps) => {
             ? "/phone-template-dark-edges.png"
             : "/phone-template-white-edges.png"
         }
-        className="pointer-events-none z-50 select-none"
+        className="pointer-events-none  z-50 select-none"
         alt="phone image"
         width={300}
         height={300}
+        style={{ userSelect: "none" }}
       />
 
       <div className="absolute -z-10 inset-0">
