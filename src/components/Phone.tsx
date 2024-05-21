@@ -1,13 +1,42 @@
+"use client";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
-import { HTMLAttributes } from "react";
+import React, { HTMLAttributes } from "react";
+import Autoplay from "embla-carousel-autoplay";
+
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+} from "@/components/ui/carousel";
 
 interface PhoneProps extends HTMLAttributes<HTMLDivElement> {
-  imgSrc: string;
+  imgSrc?: string;
   dark?: boolean;
 }
 
+const TestimonialsImage = [
+  {
+    src: "/testimonials/1.jpg",
+  },
+  {
+    src: "/testimonials/2.jpg",
+  },
+  {
+    src: "/testimonials/3.jpg",
+  },
+  {
+    src: "/testimonials/4.jpg",
+  },
+  {
+    src: "/testimonials/5.jpg",
+  },
+];
+
 const Phone = ({ imgSrc, className, dark = false, ...props }: PhoneProps) => {
+  const plugin = React.useRef(
+    Autoplay({ delay: 2000, stopOnInteraction: true })
+  );
   return (
     <div
       className={cn(
@@ -29,12 +58,36 @@ const Phone = ({ imgSrc, className, dark = false, ...props }: PhoneProps) => {
       />
 
       <div className="absolute -z-10 inset-0">
-        <Image
-          className="object-cover min-w-full min-h-full"
-          src={imgSrc}
-          alt="overlaying phone image"
-          layout="fill"
-        />
+        {imgSrc ? (
+          <Image
+            className="object-cover w-full h-full"
+            src={imgSrc}
+            alt="overlaying phone image"
+            width={300}
+            height={300}
+          />
+        ) : (
+          <Carousel
+            plugins={[plugin.current]}
+            onMouseEnter={plugin.current.stop}
+            onMouseLeave={plugin.current.reset}
+          >
+            <CarouselContent>
+              {TestimonialsImage.map((item, index) => (
+                <CarouselItem key={index} className="relative w-full h-full">
+                  <div className="relative w-full z-50 h-full">
+                    <Image
+                      src={item.src}
+                      alt={`testimonial ${index + 1}`}
+                      width={300}
+                      height={300}
+                    />
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+          </Carousel>
+        )}
       </div>
     </div>
   );

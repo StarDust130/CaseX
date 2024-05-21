@@ -74,7 +74,7 @@ export default function Home() {
                 alt="Your Image"
                 width={100}
                 height={100}
-                className="absolute w-40 lg:w-52 left-56 -top-20 select-none hidden sm:block lg:hidden xl:block "
+                className="absolute w-40 lg:w-52 left-56 -top-20 select-none hidden sm:block pointer-events-none lg:hidden xl:block "
               />
               <Image
                 src={"/line.png"}
@@ -83,7 +83,7 @@ export default function Home() {
                 height={100}
                 className="absolute w-20  -left-6 -bottom-6 select-none"
               />
-              <Phone className="w-64" imgSrc="/testimonials/1.jpg" />
+              <Phone className="w-[240px]" />
             </div>
           </div>
         </MaxWidthWrapper>
