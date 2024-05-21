@@ -1,9 +1,10 @@
 import Link from "next/link";
 import MaxWidthWrapper from "./MaxWidthWrapper";
 import { buttonVariants } from "./ui/button";
+import { BadgePlus, LogIn, ShieldCheck } from "lucide-react";
 
 const Navbar = () => {
-  const user = undefined;
+  const user = false;
   const isAdmin = false;
   return (
     <nav className="sticky z-[100] h-14 insert-x-0 top-0 w-full border-b border-gray-200 bg-white/75 backdrop-blur-lg transition-all ">
@@ -30,20 +31,26 @@ const Navbar = () => {
                     href={"/api/auth/logout"}
                     className={buttonVariants({
                       size: "sm",
-                      variant: "ghost",
+                      className: "items-center gap-1",
                     })}
                   >
-                    Dashboard🎆
+                    <ShieldCheck color="white" size={18} />
+                    Dashboard
                   </Link>
                 ) : null}
+                <div className="h-8 w-px bg-zinc-200 hidden sm:block" />
                 <Link
                   href={"/configure/upload"}
                   className={buttonVariants({
                     size: "sm",
-                    className: "hidden sm:flex items-center gap-1",
+                    className: "hidden font-normal sm:flex items-center gap-1",
+                    variant: "outline",
                   })}
                 >
-                  Create case
+                  <span className="flex gap-1 justify-center items-center">
+                    <BadgePlus color="gray" size={18} />
+                    Create case
+                  </span>
                 </Link>
               </>
             ) : (
@@ -61,9 +68,27 @@ const Navbar = () => {
                   href={"/api/auth/login"}
                   className={buttonVariants({
                     size: "sm",
+                    className: "items-center gap-1",
                   })}
                 >
+                  <LogIn color="white" size={15} />
                   Login in
+                </Link>
+
+                <div className="h-8 w-px bg-zinc-200 hidden sm:block" />
+
+                <Link
+                  href={"/configure/upload"}
+                  className={buttonVariants({
+                    size: "sm",
+                    className: "hidden font-normal sm:flex items-center gap-1",
+                    variant: "outline",
+                  })}
+                >
+                  <span className="flex gap-1 justify-center items-center">
+                    <BadgePlus color="gray" size={18} />
+                    Create case
+                  </span>
                 </Link>
               </>
             )}
