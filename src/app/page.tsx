@@ -1,6 +1,6 @@
 import { AnimatedTooltipPreview } from "@/components/AnimatedTooltipPreview";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
-import { Check } from "lucide-react";
+import { Check, StarIcon } from "lucide-react";
 import Image from "next/image";
 
 export default function Home() {
@@ -49,6 +49,13 @@ export default function Home() {
               <div className="mt-12 flex flex-col sm:flex-row items-center sm:items-start gap-5">
                 <div className="flex -space-x-4">
                   <AnimatedTooltipPreview />
+                </div>
+                <div className="flex flex-col justify-between items-center sm:items-start">
+                  <div className="flex gap-0.5 ">
+                    <StarIcon />
+
+                  </div>
+
                 </div>
               </div>
             </div>

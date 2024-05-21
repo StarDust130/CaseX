@@ -4,9 +4,9 @@ import { AnimatedTooltip } from "./ui/animated-tooltip";
 const people = [
   {
     id: 1,
-    name: "John Doe",
-    designation: "Software Engineer",
-    image: "/users/user-1.png",
+    name: "Priyanka Don",
+    designation: "HR",
+    image: "/didi.jpg",
   },
   {
     id: 2,
