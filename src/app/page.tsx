@@ -121,7 +121,7 @@ export default function Home() {
             />
           </div>
 
-          <div className="mx-auto grid max-w-2xl grid-col-1 px-4 lg:mx-0 lg:max-w-none lg:grid-col-2 gap-y-16">
+          <div className="mx-auto grid max-w-2xl grid-cols-1 px-4 lg:mx-0 lg:max-w-none lg:grid-cols-2 gap-y-16">
             <div className="flex flex-auto flex-col gap-4 lg:pr-8 xl:pr-20">
               <div className="flex gap-0.5 mb-2">
                 <Star className="h-5 w-5 text-green-600 fill-green-600" />
@@ -161,7 +161,7 @@ export default function Home() {
             </div>
 
             {/*  Second User Review */}
-            <div className="flex flex-auto flex-col gap-4 lg:pr-8 xl:pr-20">
+            <div className="flex flex-auto  flex-col gap-4 lg:pr-8 xl:pr-20">
               <div className="flex gap-0.5 mb-2">
                 <Star className="h-5 w-5 text-green-600 fill-green-600" />
                 <Star className="h-5 w-5 text-green-600 fill-green-600" />
@@ -176,8 +176,8 @@ export default function Home() {
                   <span className="p-0.5 font-bold bg-green-600 rounded-md text-white">
                     game-changer.
                   </span>{" "}
-                  Cool design, durable protection, and major style points.
-                  Thanks, CaseX! 📱&quot;
+                  Cool design, durable protection, cover quality all are great
+                  and major style points. Thanks, CaseX! 📱&quot;
                 </p>
               </div>
               <div className="flex gap-4 mt-2">
@@ -188,7 +188,7 @@ export default function Home() {
                   width={100}
                   height={100}
                 />
-                <div className="flex flex-col">
+                <div className="flex flex-col ">
                   <p className="font-semibold">Natasha</p>
                   <div className="flex gap-1.5 items-center ">
                     <Check className="h-5 w-5 stroke-[3px] shrink-0 text-green-600 " />
