@@ -19,9 +19,9 @@ const Footer = () => {
                 </div>
               </div>
 
-              <p className="mt-4 text-center text-sm  lg:mt-0 lg:text-right">
+              <p className="mt-4 font-semibold text-center text-sm  lg:mt-0 lg:text-right">
                 Copyright{" "}
-                <span className="hover:underline text-yellow-300 ">
+                <span className="hover:underline dark:text-yellow-300 text-yellow-600 ">
                   <Link href={"https://github.com/StarDust130"} target="_blank">
                     {" "}
                     StarDust
