@@ -1,6 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
+import { ImageIcon, Loader, MousePointerSquareDashed } from "lucide-react";
 import { useState } from "react";
 import DropZone, { FileRejection } from "react-dropzone";
 
@@ -15,7 +16,7 @@ const Upload = () => {
         { "ring-blue-900/25 bg-blue-900/10": isDragOver }
       )}
     >
-      <div className="relative flex flex-1 flex-col items-center justify-center w-full">
+      <div className="relative flex flex-1 flex-col items-center justify-center w-full ">
         <DropZone
           onDropRejected={onDropRejected}
           onDropAccepted={onDropAccepted}
@@ -25,11 +26,17 @@ const Upload = () => {
         >
           {({ getRootProps, getInputProps }) => (
             <div
-              className="h-full w-full flex-1 flex flex-col items-center justify-center"
+              className="h-full w-full  flex-1 flex flex-col items-center justify-center"
               {...getRootProps()}
             >
               <input {...getInputProps()} />
-              hello
+              {isDragOver ? (
+                <MousePointerSquareDashed className="h-6 w-6 text-zinc-500 mb-2" />
+              ) : false ? (
+                <Loader className="animate-spin h-6 w-6 text-zinc-500 mb-2" />
+              ) : (
+                <ImageIcon className="h-6 w-6 text-zinc-500 mb-2" />
+              )}
             </div>
           )}
         </DropZone>
