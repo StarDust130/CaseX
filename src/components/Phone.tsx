@@ -31,6 +31,9 @@ const TestimonialsImage = [
   {
     src: "/testimonials/5.jpg",
   },
+  {
+    src: "/testimonials/6.jpg",
+  },
 ];
 
 const Phone = ({ imgSrc, className, dark = false, ...props }: PhoneProps) => {

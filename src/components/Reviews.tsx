@@ -1,35 +1,36 @@
 "use client";
-import Image from "next/image";
-import MaxWidthWrapper from "./MaxWidthWrapper";
+
 import { HTMLAttributes, useEffect, useRef, useState } from "react";
+import MaxWidthWrapper from "./MaxWidthWrapper";
 import { useInView } from "framer-motion";
 import { cn } from "@/lib/utils";
 import Phone from "./Phone";
+import Image from "next/image";
 
 const PHONES = [
-  "/testimonials/phone-1.jpg",
-  "/testimonials/phone-2.jpg",
-  "/testimonials/phone-3.jpg",
-  "/testimonials/phone-4.jpg",
-  "/testimonials/phone-5.jpg",
-  "/testimonials/phone-6.jpg",
+  "/testimonials/1.jpg",
+  "/testimonials/2.jpg",
+  "/testimonials/3.jpg",
+  "/testimonials/4.jpg",
+  "/testimonials/5.jpg",
+  "/testimonials/6.jpg",
 ];
 
-//! Split an array into n parts of equal length
-function splitArray<T>(array: Array<T>, numPart: number) {
+function splitArray<T>(array: Array<T>, numParts: number) {
   const result: Array<Array<T>> = [];
 
   for (let i = 0; i < array.length; i++) {
-    const index = i % numPart;
+    const index = i % numParts;
     if (!result[index]) {
       result[index] = [];
     }
     result[index].push(array[i]);
   }
+
   return result;
 }
 
-const ReviewColumn = ({
+function ReviewColumn({
   reviews,
   className,
   reviewClassName,
@@ -39,10 +40,10 @@ const ReviewColumn = ({
   className?: string;
   reviewClassName?: (reviewIndex: number) => string;
   msPerPixel?: number;
-}) => {
+}) {
   const columnRef = useRef<HTMLDivElement | null>(null);
   const [columnHeight, setColumnHeight] = useState(0);
-  const duration = `${columnHeight / msPerPixel}ms`;
+  const duration = `${columnHeight * msPerPixel}ms`;
 
   useEffect(() => {
     if (!columnRef.current) return;
@@ -73,14 +74,14 @@ const ReviewColumn = ({
       ))}
     </div>
   );
-};
+}
 
 interface ReviewProps extends HTMLAttributes<HTMLDivElement> {
   imgSrc: string;
 }
 
-const Review = ({ imgSrc, className, ...props }: ReviewProps) => {
-  const POSSIBLE_ANIMATION_DELAY = [
+function Review({ imgSrc, className, ...props }: ReviewProps) {
+  const POSSIBLE_ANIMATION_DELAYS = [
     "0s",
     "0.1s",
     "0.2s",
@@ -90,14 +91,14 @@ const Review = ({ imgSrc, className, ...props }: ReviewProps) => {
   ];
 
   const animationDelay =
-    POSSIBLE_ANIMATION_DELAY[
-      Math.floor(Math.random() * POSSIBLE_ANIMATION_DELAY.length)
+    POSSIBLE_ANIMATION_DELAYS[
+      Math.floor(Math.random() * POSSIBLE_ANIMATION_DELAYS.length)
     ];
 
   return (
     <div
       className={cn(
-        "animate-fade-in rounded-[2.25rem] p-6 opacity-0 shadow-xl shadow-slate-900/5",
+        "animate-fade-in rounded-[2.25rem] bg-white p-6 opacity-0 shadow-xl shadow-slate-900/5",
         className
       )}
       style={{ animationDelay }}
@@ -106,18 +107,15 @@ const Review = ({ imgSrc, className, ...props }: ReviewProps) => {
       <Phone imgSrc={imgSrc} />
     </div>
   );
-};
+}
 
-const ReviewGrid = () => {
+function ReviewGrid() {
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const isInView = useInView(containerRef, {
-    once: true,
-    amount: 0.5,
-  });
-  const coloums = splitArray(PHONES, 3);
-  const coloums1 = coloums[0];
-  const coloums2 = coloums[1];
-  const coloums3 = splitArray(coloums[2], 2);
+  const isInView = useInView(containerRef, { once: true, amount: 0.4 });
+  const columns = splitArray(PHONES, 3);
+  const column1 = columns[0];
+  const column2 = columns[1];
+  const column3 = splitArray(columns[2], 2);
 
   return (
     <div
@@ -127,51 +125,49 @@ const ReviewGrid = () => {
       {isInView ? (
         <>
           <ReviewColumn
-            reviews={[...coloums1, ...coloums3.flat(), ...coloums2]}
+            reviews={[...column1, ...column3.flat(), ...column2]}
             reviewClassName={(reviewIndex) =>
               cn({
-                "md:hidden":
-                  reviewIndex >= coloums1.length + coloums3[0].length,
-                "lg:hidden": reviewIndex >= coloums1.length,
+                "md:hidden": reviewIndex >= column1.length + column3[0].length,
+                "lg:hidden": reviewIndex >= column1.length,
               })
             }
             msPerPixel={10}
           />
           <ReviewColumn
-            reviews={[...coloums2, ...coloums3[1]]}
+            reviews={[...column2, ...column3[1]]}
             className="hidden md:block"
             reviewClassName={(reviewIndex) =>
-              reviewIndex >= coloums2.length ? "lg:hidden" : ""
+              reviewIndex >= column2.length ? "lg:hidden" : ""
             }
             msPerPixel={15}
           />
           <ReviewColumn
-            reviews={[...coloums3.flat()]}
+            reviews={column3.flat()}
             className="hidden md:block"
             msPerPixel={10}
           />
         </>
       ) : null}
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-slate-100" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-slate-100" />
     </div>
   );
-};
+}
 
-const Reviews = () => {
+export default function Reviews() {
   return (
-    <>
-      <MaxWidthWrapper className="relative max-w-5xl ">
-        <Image
-          aria-hidden="true"
-          src={"/what-people-are-buying.png"}
-          alt="What-people-are-buying"
-          width={100}
-          height={100}
-          className="absolute select-none hidden xl:block -left-32 top-1/3"
-        />
+    <MaxWidthWrapper className="relative max-w-5xl">
+      <Image
+        aria-hidden="true"
+        src="/what-people-are-buying.png"
+        className="absolute select-none hidden xl:block -left-32 top-1/3"
+        width={100}
+        height={100}
+        alt="What people are buying"
+      />
 
-        <ReviewGrid />
-      </MaxWidthWrapper>
-    </>
+      <ReviewGrid />
+    </MaxWidthWrapper>
   );
-};
-export default Reviews;
+}
