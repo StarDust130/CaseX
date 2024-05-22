@@ -1,7 +1,9 @@
 import { AnimatedTooltipPreview } from "@/components/AnimatedTooltipPreview";
+import { Icons } from "@/components/Icons";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import Phone from "@/components/Phone";
-import { Check, StarIcon } from "lucide-react";
+import Reviews from "@/components/Reviews";
+import { Check, Star, StarIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -94,6 +96,112 @@ export default function Home() {
             </div>
           </div>
         </MaxWidthWrapper>
+      </section>
+
+      {/* Value Proposition Section */}
+
+      <section className=" py-24">
+        <MaxWidthWrapper className="flex flex-col items-center gap-16">
+          <div className="flex flex-col lg:flex-row items-center gap-4 sm:gap-6">
+            <h2 className="order-1 mt- tracking-tight text-center text-balance !leading-tight font-bold text-5xl md:text-6xl text-gray-900 dark:text-gray-300">
+              What our{" "}
+              <span className="relative px-2">
+                customer{" "}
+                <Icons.underline className="hidden sm:block pointer-events-none absolute inset-x-0 -bottom-6 text-green-500 " />
+              </span>{" "}
+              say
+            </h2>
+            <Image
+              src={"/snake-2.png"}
+              alt="Snake Image"
+              width={100}
+              height={100}
+              className="w-24 order-0 lg:order-2 pointer-events-none"
+            />
+          </div>
+
+          <div className="mx-auto grid max-w-2xl grid-col-1 px-4 lg:mx-0 lg:max-w-none lg:grid-col-2 gap-y-16">
+            <div className="flex flex-auto flex-col gap-4 lg:pr-8 xl:pr-20">
+              <div className="flex gap-0.5 mb-2">
+                <Star className="h-5 w-5 text-green-600 fill-green-600" />
+                <Star className="h-5 w-5 text-green-600 fill-green-600" />
+                <Star className="h-5 w-5 text-green-600 fill-green-600" />
+                <Star className="h-5 w-5 text-green-600 fill-green-600" />
+                <Star className="h-5 w-5 text-green-600 fill-green-600" />
+              </div>
+              <div className="text-lg leading-8">
+                <p className="text-center">
+                  &quot;I absolutely love my new phone case! It&apos;s not just
+                  a case, it&apos;s a{" "}
+                  <span className="p-0.5 font-bold bg-green-600 rounded-md text-white">
+                    statement piece.
+                  </span>
+                  The unique design always gets compliments, and it perfectly
+                  balances style with protection. CaseX has truly outdone
+                  themselves!&quot;
+                </p>
+              </div>
+              <div className="flex gap-4 mt-2">
+                <Image
+                  src={"/users/user-1.png"}
+                  alt="user-1"
+                  className="rounded-full h-12 w-12  object-cover"
+                  width={100}
+                  height={100}
+                />
+                <div className="flex flex-col">
+                  <p className="font-semibold">John</p>
+                  <div className="flex gap-1.5 items-center ">
+                    <Check className="h-5 w-5 stroke-[3px] shrink-0 text-green-600 " />
+                    <p className="text-sm">Verifed Purchase</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/*  Second User Review */}
+            <div className="flex flex-auto flex-col gap-4 lg:pr-8 xl:pr-20">
+              <div className="flex gap-0.5 mb-2">
+                <Star className="h-5 w-5 text-green-600 fill-green-600" />
+                <Star className="h-5 w-5 text-green-600 fill-green-600" />
+                <Star className="h-5 w-5 text-green-600 fill-green-600" />
+                <Star className="h-5 w-5 text-green-600 fill-green-600" />
+                <Star className="h-5 w-5 text-green-600 fill-green-600" />
+              </div>
+              <div className="text-lg leading-8">
+                <p className="text-center">
+                  &quot; Obsessed with my new phone case! It&apos;s not your
+                  average cover—it&apos;s a total{" "}
+                  <span className="p-0.5 font-bold bg-green-600 rounded-md text-white">
+                    game-changer.
+                  </span>{" "}
+                  Cool design, durable protection, and major style points.
+                  Thanks, CaseX! 📱&quot;
+                </p>
+              </div>
+              <div className="flex gap-4 mt-2">
+                <Image
+                  src={"/users/user-2.png"}
+                  alt="user-2 image"
+                  className="rounded-full h-12 w-12  object-cover"
+                  width={100}
+                  height={100}
+                />
+                <div className="flex flex-col">
+                  <p className="font-semibold">Natasha</p>
+                  <div className="flex gap-1.5 items-center ">
+                    <Check className="h-5 w-5 stroke-[3px] shrink-0 text-green-600 " />
+                    <p className="text-sm">Verifed Purchase</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </MaxWidthWrapper> 
+
+        <div className="pt-16">
+          <Reviews />
+        </div>
       </section>
     </div>
   );
