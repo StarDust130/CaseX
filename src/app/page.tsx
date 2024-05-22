@@ -205,7 +205,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* Upload Now Section */}
 
       <section>
         <MaxWidthWrapper className="py-24">
