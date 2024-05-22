@@ -81,7 +81,7 @@ export default function Home() {
                 alt="Your Image"
                 width={100}
                 height={100}
-                className="absolute w-40 lg:w-52 left-56 -top-20 select-none hidden sm:block pointer-events-none lg:hidden xl:block "
+                className="absolute w-40 lg:w-52 left-56 -top-20 select-none hidden sm:block pointer-events-none lg:hidden xl:block  dark:invert"
               />
               <Image
                 src={"/line.png"}

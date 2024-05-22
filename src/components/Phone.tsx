@@ -51,7 +51,7 @@ const Phone = ({ imgSrc, className, dark = false, ...props }: PhoneProps) => {
             ? "/phone-template-dark-edges.png"
             : "/phone-template-white-edges.png"
         }
-        className="pointer-events-none  z-50 select-none"
+        className="pointer-events-none  z-50 select-none  "
         alt="phone image"
         width={300}
         height={300}
@@ -61,7 +61,7 @@ const Phone = ({ imgSrc, className, dark = false, ...props }: PhoneProps) => {
       <div className="absolute -z-10 inset-0">
         {imgSrc ? (
           <Image
-            className="object-cover w-full h-full"
+            className="object-cover w-full h-full "
             src={imgSrc}
             alt="overlaying phone image"
             width={300}
@@ -82,6 +82,7 @@ const Phone = ({ imgSrc, className, dark = false, ...props }: PhoneProps) => {
                       alt={`testimonial ${index + 1}`}
                       width={300}
                       height={300}
+                      className="object-cover w-full h-full rounded-3xl"
                     />
                   </div>
                 </CarouselItem>
