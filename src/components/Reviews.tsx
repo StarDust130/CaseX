@@ -149,8 +149,8 @@ function ReviewGrid() {
           />
         </>
       ) : null}
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-slate-100" />
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-slate-100" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-slate-100 dark:bg-none " />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-slate-100 dark:bg-none" />
     </div>
   );
 }
@@ -161,7 +161,7 @@ export default function Reviews() {
       <Image
         aria-hidden="true"
         src="/what-people-are-buying.png"
-        className="absolute select-none hidden xl:block -left-32 top-1/3"
+        className="absolute select-none hidden xl:block -left-32 top-1/3 dark:invert"
         width={100}
         height={100}
         alt="What people are buying"
