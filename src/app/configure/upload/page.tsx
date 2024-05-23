@@ -1,23 +1,62 @@
 "use client";
 
 import { Progress } from "@/components/ui/progress";
+import { useToast } from "@/components/ui/use-toast";
+import { useUploadThing } from "@/lib/uploadthings";
 import { cn } from "@/lib/utils";
 import { ImageIcon, Loader, MousePointerSquareDashed } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 import DropZone, { FileRejection } from "react-dropzone";
 
 const Upload = () => {
   const [isDragOver, setIsDragOver] = useState<boolean>(false);
   const [uploadProgress, setUploadProgress] = useState<number>(0);
-  const onDropRejected = () => {};
-  const onDropAccepted = () => {};
+  const router = useRouter();
+  const { toast } = useToast();
 
-  const isUploading = false;
+  const { startUpload, isUploading } = useUploadThing("imageUploader", {
+    onClientUploadComplete: ([data]) => {
+      const configId = data.serverData.configId;
+      startTransition(() => {
+        router.push(`/configure/design?id=${configId}`);
+      });
+    },
+    onUploadProgress(p) {
+      setUploadProgress(p);
+    },
+  });
+
+  //! File Upload Rejection Handler
+  const onDropRejected = (rejectedFiles: FileRejection[]) => {
+    const [file] = rejectedFiles;
+
+    toast({
+      title: `${file.file.name} type not supported!`,
+      description:
+        "Please upload a valid image file (PNG, JPG, JPEG) less than 4MB.",
+      variant: "destructive",
+    });
+    setIsDragOver(false);
+  };
+
+  //! File Upload Acceptance Handler
+  const onDropAccepted = (acceptedFile: File[]) => {
+    startUpload(acceptedFile, { configId: undefined });
+
+    setIsDragOver(false);
+
+    toast({
+      title: "File Uploaded Successfully!  🎉",
+      description: "Redirecting to the design page...",
+    });
+  };
+
   const [isPending, startTransition] = useTransition();
   return (
     <div
       className={cn(
-        "relative h-full flex-1 my-16 w-full rounded-xl bg-gray-900/5 p-2 ring-1 ring-inset ring-gray-900/10 lg:rounded-2xl flex justify-center flex-col items-center",
+        "relative h-full flex-1 my-16 w-full rounded-xl bg-gray-900/5 p-2 ring-1 ring-inset ring-gray-900/10 lg:rounded-2xl flex justify-center flex-col items-center border-2 border-dashed border-gray-900/50 ",
         {
           "ring-blue-900/25 bg-blue-900/10": isDragOver,
         }
@@ -56,8 +95,7 @@ const Upload = () => {
                   </div>
                 ) : isDragOver ? (
                   <p>
-                    <span className="font-semibold">Drop file</span>
-                    to upload
+                    <span className="font-semibold">Drop file</span> to upload
                   </p>
                 ) : (
                   <p>
