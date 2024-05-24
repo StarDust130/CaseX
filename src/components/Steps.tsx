@@ -42,7 +42,7 @@ const Steps = () => {
                   className={cn(
                     "absolute left-0 top-0 h-full w-1 bg-zinc-400 lg:bottom-0 lg:top-auto lg:h-1 lg:w-full",
                     {
-                      "bg-green-700": isCurrent,
+                      "bg-green-600": isCurrent,
                       "bg-primary": isCompleted,
                     }
                   )}
