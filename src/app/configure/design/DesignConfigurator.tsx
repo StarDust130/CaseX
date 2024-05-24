@@ -1,7 +1,10 @@
+"use client";
 import NextImage from "next/image";
 
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { cn } from "@/lib/utils";
+import { Rnd } from "react-rnd";
+import HandleComponent from "@/components/HandleComponent";
 
 interface DesignConfigProps {
   configId: string;
@@ -43,15 +46,34 @@ const DesignConfigurator = ({
               )}
             />
           </div>
-
-          <div className="relative w-full h-full">
-            <NextImage
-              src={imageUrl}
-              fill
-              alt={"your Image"}
-              className="pointer-events-none dark:brightness-200  z-50  select-none"
-            />
-          </div>
+          <Rnd
+            default={{
+              x: 150,
+              y: 205,
+              height: imageDimensions.height / 4,
+              width: imageDimensions.width / 4,
+            }}
+            className="absolute z-50 border-[3px] border-primary"
+            lockAspectRatio
+            resizeHandleComponent={{
+              bottomRight: <HandleComponent />,
+              bottomLeft: <HandleComponent />,
+              topRight: <HandleComponent />,
+              topLeft: <HandleComponent />,
+            }}
+          >
+            <div className="relative w-full h-full">
+              <NextImage
+                src={imageUrl}
+                fill
+                alt={"your Image"}
+                className="pointer-events-none "
+              />
+            </div>
+          </Rnd>
+        </div>
+        <div className="h-[37.7rem] flex flex-col bg-white">
+          
         </div>
       </div>
     </>
