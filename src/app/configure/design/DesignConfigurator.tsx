@@ -1,6 +1,7 @@
 import NextImage from "next/image";
 
 import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { cn } from "@/lib/utils";
 
 interface DesignConfigProps {
   configId: string;
@@ -28,11 +29,28 @@ const DesignConfigurator = ({
               <NextImage
                 src="/phone-template.png"
                 alt="phone image"
-                width={896}
-                height={1831}
+                fill
                 className="pointer-events-none dark:brightness-200  z-50  select-none"
               />
             </AspectRatio>
+            {/* Highlight phone over it Background */}
+            <div className="absolute z-40 inset-0 left-[3px] top-px right-[3px] bottom-px rounded-[32px] shadow-[0_0_0_99999px_rgb(229,231,235,0.6)]" />
+
+            <div
+              className={cn(
+                "absolute z-40 inset-0 left-[3px] top-px right-[3px] bottom-px rounded-[32px]",
+                `bg-blue-950`
+              )}
+            />
+          </div>
+
+          <div className="relative w-full h-full">
+            <NextImage
+              src={imageUrl}
+              fill
+              alt={"your Image"}
+              className="pointer-events-none dark:brightness-200  z-50  select-none"
+            />
           </div>
         </div>
       </div>
