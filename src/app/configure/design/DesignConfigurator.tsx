@@ -2,7 +2,7 @@
 import NextImage from "next/image";
 
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { cn } from "@/lib/utils";
+import { cn, formatPrice } from "@/lib/utils";
 import { Rnd } from "react-rnd";
 import HandleComponent from "@/components/HandleComponent";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -28,6 +28,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { Check, ChevronsUpDown } from "lucide-react";
+import { BASE_PRICE } from "@/config/products";
 
 interface DesignConfigProps {
   configId: string;
@@ -256,7 +257,7 @@ const DesignConfigurator = ({
                                 className="mt-2 flex text-sm sm:ml-4 sm:mt-0 sm:flex-col sm:text-right"
                               >
                                 <span className="font-medium text-gray-900">
-                                  {/* {formatPrice(option.price / 100)} */} 100
+                                  {formatPrice(option.price / 100)}
                                 </span>
                               </RadioGroup.Description>
                             </RadioGroup.Option>
@@ -269,6 +270,23 @@ const DesignConfigurator = ({
               </div>
             </div>
           </ScrollArea>
+
+          <div className="w-full px-8 h-16 ">
+            <Separator className="w-full" />
+            <div className="w-full h-full flex justify-end items-center">
+              <div className="w-full flex gap-6">
+                <p className="font-medium whitespace-nowrap">
+                  Total:{" "}
+                  {formatPrice(
+                   ( BASE_PRICE +
+                      options.finish.price +
+                      options.material.price) / 100
+                  )}
+                </p>
+              </div>
+              <Button>Buy now</Button>
+            </div>
+          </div>
         </div>
       </div>
     </>
