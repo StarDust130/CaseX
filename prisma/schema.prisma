@@ -35,6 +35,9 @@ enum CaseFinish {
 enum CaseColor {
   black
   blue
+  pink 
+  orange
+  yellow
   rose
 }
 

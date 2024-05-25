@@ -1,4 +1,7 @@
-// bg-blue-950 border-blue-950
+// bg-blue-600 border-blue-600
+// bg-pink-600 border-pink-600
+// bg-orange-600 border-orange-600
+// bg-yellow-500 border-yellow-500
 // bg-zinc-900 border-zinc-900
 // bg-rose-950 border-rose-950
 
@@ -9,7 +12,22 @@ export const COLORS = [
   {
     label: "Blue",
     value: "blue",
-    tw: "blue-950",
+    tw: "blue-600",
+  },
+  {
+    label: "Pink",
+    value: "pink",
+    tw: "pink-600",
+  },
+  {
+    label: "Orange",
+    value: "orange",
+    tw: "orange-600",
+  },
+  {
+    label: "Yellow",
+    value: "yellow",
+    tw: "yellow-500",
   },
   { label: "Rose", value: "rose", tw: "rose-950" },
 ] as const;

@@ -22,13 +22,20 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Check, ChevronsUpDown } from "lucide-react";
+import {
+  ArrowRight,
+  Check,
+  ChevronsUpDown,
+  Loader,
+  MoveRight,
+} from "lucide-react";
 import { BASE_PRICE } from "@/config/products";
 import { useUploadThing } from "@/lib/uploadthings";
 import { useToast } from "@/components/ui/use-toast";
 import { useMutation } from "@tanstack/react-query";
 import { saveConfig as _saveConfig, SaveConfigArgs } from "./action";
 import { useRouter } from "next/navigation";
+import { CaseColor } from "@prisma/client";
 
 interface DesignConfiguratorProps {
   configId: string;
@@ -43,12 +50,14 @@ const DesignConfigurator = ({
 }: DesignConfiguratorProps) => {
   const { toast } = useToast();
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
 
   const { mutate: saveConfig, isPending } = useMutation({
     mutationKey: ["save-config"],
     mutationFn: async (args: SaveConfigArgs) => {
       await Promise.all([saveConfiguration(), _saveConfig(args)]);
     },
+
     onError: () => {
       toast({
         title: "Something went wrong",
@@ -57,6 +66,10 @@ const DesignConfigurator = ({
       });
     },
     onSuccess: () => {
+      toast({
+        title: "Your image has been saved successfully.🥳",
+        description: "Preview your design and continue to checkout.",
+      });
       router.push(`/configure/preview?id=${configId}`);
     },
   });
@@ -68,7 +81,7 @@ const DesignConfigurator = ({
     finish: (typeof FINISHES.options)[number];
   }>({
     color: COLORS[0],
-    model: MODELS.options[0],
+    model: MODELS.options[MODELS.options.length - 1],
     material: MATERIALS.options[0],
     finish: FINISHES.options[0],
   });
@@ -90,6 +103,7 @@ const DesignConfigurator = ({
 
   async function saveConfiguration() {
     try {
+      setLoading(true);
       const {
         left: caseLeft,
         top: caseTop,
@@ -138,6 +152,8 @@ const DesignConfigurator = ({
           "There was a problem saving your config, please try again.",
         variant: "destructive",
       });
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -396,7 +412,7 @@ const DesignConfigurator = ({
                 onClick={() =>
                   saveConfig({
                     configId,
-                    color: options.color.value,
+                    color: options.color.value as CaseColor,
                     finish: options.finish.value,
                     material: options.material.value,
                     model: options.model.value,
@@ -405,8 +421,15 @@ const DesignConfigurator = ({
                 size="sm"
                 className="w-full"
               >
-                Continue
-                <ArrowRight className="h-4 w-4 ml-1.5 inline" />
+                {loading ? (
+                  <>
+                    Saving... <Loader className="w-4 h-4 ml-2 animate-spin" />
+                  </>
+                ) : (
+                  <>
+                    Continue <MoveRight className="w-4 h-4 ml-2 " />
+                  </>
+                )}
               </Button>
             </div>
           </div>
