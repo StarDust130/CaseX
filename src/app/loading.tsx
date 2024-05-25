@@ -1,11 +1,21 @@
+"use client";
 
+// ProgressBar.js
+import { useEffect } from "react";
+import NProgress from "nprogress";
+import "nprogress/nprogress.css";
 
-const Loading = () => {
-  return (
-    <div className="flex justify-center bg-transparent items-center h-screen">
-      <div className="animate-spin rounded-full h-20 w-20 border-t-2 border-b-2 border-gray-900 bg-transparent"></div>
-    </div>
-  );
+NProgress.configure({ showSpinner: false });
+
+const ProgressBar = () => {
+  useEffect(() => {
+    NProgress.start();
+    return () => {
+      NProgress.done();
+    };
+  }, []);
+
+  return null;
 };
 
-export default Loading;
+export default ProgressBar;
