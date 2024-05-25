@@ -1,33 +1,21 @@
-// bg-blue-400 border-blue-400
-// bg-rose-400 border-rose-400
+// bg-blue-950 border-blue-950
 // bg-zinc-900 border-zinc-900
-// bg-yellow-400 border-yellow-400
-// bg-green-400 border-green-400
-// bg-red-400 border-red-400
-// bg-purple-400 border-purple-400
-// bg-orange-400 border-orange-400
-// bg-gray-400 border-gray-400
-// bg-pink-400 border-pink-400
-// bg-brown-400 border-brown-400
+// bg-rose-950 border-rose-950
 
 import { PRODUCT_PRICES } from "@/config/products";
 
-
-
 export const COLORS = [
   { label: "Black", value: "black", tw: "zinc-900" },
-  { label: "Transparent", value: "transparent", tw: "transparent" },
-  { label: "Blue", value: "blue", tw: "blue-400" },
-  { label: "Rose", value: "rose", tw: "rose-400" },
-  { label: "Yellow", value: "yellow", tw: "yellow-400" },
-  { label: "Green", value: "green", tw: "green-400" },
-  { label: "Gray", value: "gray", tw: "gray-400" },
-  
+  {
+    label: "Blue",
+    value: "blue",
+    tw: "blue-950",
+  },
+  { label: "Rose", value: "rose", tw: "rose-950" },
 ] as const;
 
-
 export const MODELS = {
-  name: "model",
+  name: "models",
   options: [
     {
       label: "iPhone X",
