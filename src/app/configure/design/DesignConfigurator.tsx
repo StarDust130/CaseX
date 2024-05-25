@@ -27,7 +27,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-import { Check, ChevronsUpDown } from "lucide-react";
+import { ArrowRight, Check, ChevronsUpDown } from "lucide-react";
 import { BASE_PRICE } from "@/config/products";
 
 interface DesignConfigProps {
@@ -278,14 +278,22 @@ const DesignConfigurator = ({
                 <p className="font-medium whitespace-nowrap">
                   Total:{" "}
                   {formatPrice(
-                   ( BASE_PRICE +
+                    (BASE_PRICE +
                       options.finish.price +
-                      options.material.price) / 100
+                      options.material.price) /
+                      100
                   )}
                 </p>
               </div>
-              <Button>Buy now</Button>
+              <div className="w-full h-full flex justify-end items-center">
+                <span className="text-base font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-600 animate-pulse-bounce">
+                  + Free Delivery
+                </span>
+              </div>
             </div>
+            <Button size={"sm"} className="w-full">
+              Continue <ArrowRight className="h-5 w-4 ml-1.5 inline" />
+            </Button>
           </div>
         </div>
       </div>

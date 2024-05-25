@@ -74,8 +74,14 @@ const config: Config = {
           from: { opacity: "0" },
           to: { opacity: "1" },
         },
+        "pulse-bounce": {
+          "0%, 100%": { transform: "translateY(-25%)", opacity: "0.8" },
+          "50%": { transform: "translateY(0)", opacity: "1" },
+        },
       },
       animation: {
+        "pulse-bounce": "pulse-bounce 1s ease-in-out infinite",
+
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         marquee: "marquee var(--marquee-duration) linear infinite",
