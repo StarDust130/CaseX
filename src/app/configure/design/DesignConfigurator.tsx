@@ -25,8 +25,10 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Check, ChevronsUpDown } from "lucide-react";
+import { ArrowRight, Check, ChevronsUpDown, Loader } from "lucide-react";
 import { BASE_PRICE } from "@/config/products";
+import { useToast } from "@/components/ui/use-toast";
+import { useUploadThing } from "@/lib/uploadthings";
 
 interface DesignConfigProps {
   configId: string;
@@ -42,6 +44,7 @@ const DesignConfigurator = ({
   imageDimensions,
   configId,
 }: DesignConfigProps) => {
+  const { toast } = useToast();
   const [options, setOptions] = useState<{
     color: (typeof COLORS)[number];
     model: (typeof MODELS.options)[number];
@@ -54,12 +57,12 @@ const DesignConfigurator = ({
     finish: FINISHES.options[0],
   });
 
-  const [renderDimensions, setRenderDimensions] = useState({
+  const [renderedDimension, setRenderDimensions] = useState({
     width: imageDimensions.width / 4,
     height: imageDimensions.height / 4,
   });
 
-  const [renderPostion, setRenderPosition] = useState({
+  const [renderedPosition, setRenderPosition] = useState({
     x: 150,
     y: 205,
   });
@@ -67,28 +70,80 @@ const DesignConfigurator = ({
   const phoneCaseRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
+  const { startUpload } = useUploadThing("imageUploader");
+
+  const [loading, setLoading] = useState(false);
+
   async function saveConfiguration() {
     try {
-      const {left: caseLeft , top: caseTop , width , height } = phoneCaseRef.current!.getBoundingClientRect();
+      setLoading(true);
+      const {
+        left: caseLeft,
+        top: caseTop,
+        width,
+        height,
+      } = phoneCaseRef.current!.getBoundingClientRect();
 
-      const { left: containerLeft, top:containerTop } =
+      const { left: containerLeft, top: containerTop } =
         containerRef.current!.getBoundingClientRect();
 
-        const leftOffset = caseLeft - containerLeft;
-        const topOffset = caseTop - containerTop;
+      const leftOffset = caseLeft - containerLeft;
+      const topOffset = caseTop - containerTop;
 
-        const actualX = renderPostion.x - leftOffset;
-        const actualY = renderPostion.y - topOffset;
+      const actualX = renderedPosition.x - leftOffset;
+      const actualY = renderedPosition.y - topOffset;
 
-        console.log("actualX", actualX);
-        console.log("actualY", actualY);
-        
-        
-    } catch (error) {
+      const canvas = document.createElement("canvas");
+      canvas.width = width;
+      canvas.height = height;
+      const ctx = canvas.getContext("2d");
 
+      const userImage = new Image();
+      userImage.crossOrigin = "anonymous";
+      userImage.src = imageUrl;
+      await new Promise((resolve) => (userImage.onload = resolve));
+
+      ctx?.drawImage(
+        userImage,
+        actualX,
+        actualY,
+        renderedDimension.width,
+        renderedDimension.height
+      );
+
+      const base64 = canvas.toDataURL();
+      const base64Data = base64.split(",")[1];
+
+      const blob = base64ToBlob(base64Data, "image/png");
+      const file = new File([blob], "filename.png", { type: "image/png" });
+
+      setLoading(false);
+
+      toast({
+        title: "Image Saved Successfully 🎉",
+        description: "Redirect to the next step to complete your order.",
+      });
+
+      await startUpload([file], { configId });
+    } catch (err) {
+      toast({
+        title: "Something went wrong",
+        description:
+          "There was a problem saving your config, please try again.",
+        variant: "destructive",
+      });
     }
   }
 
+  function base64ToBlob(base64: string, mimeType: string) {
+    const byteCharacters = atob(base64);
+    const byteNumbers = new Array(byteCharacters.length);
+    for (let i = 0; i < byteCharacters.length; i++) {
+      byteNumbers[i] = byteCharacters.charCodeAt(i);
+    }
+    const byteArray = new Uint8Array(byteNumbers);
+    return new Blob([byteArray], { type: mimeType });
+  }
   return (
     <>
       <div className="relative mt-20 grid grid-cols-1 lg:grid-cols-3 mb-20 pb-20">
@@ -342,8 +397,18 @@ const DesignConfigurator = ({
                 😉
               </div>
             </div>
-            <Button size="sm" className="w-full">
-              Continue <ArrowRight className="h-5 w-4 ml-1.5 inline" />
+            <Button onClick={saveConfiguration} size="sm" className="w-full">
+              {loading ? (
+                <>
+                  <span>Saving... Please Wait</span>
+                  <Loader className="ml-2 h-4 w-4 animate-spin" />
+                </>
+              ) : (
+                <>
+                  <span>Continue</span>
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </>
+              )}
             </Button>
           </div>
         </div>
