@@ -11,7 +11,12 @@ import { Separator } from "@/components/ui/separator";
 
 import { Field, Radio, RadioGroup } from "@headlessui/react";
 import { useState } from "react";
-import { COLORS, MODELS } from "@/validators/option-validator";
+import {
+  COLORS,
+  FINISHES,
+  MATERIALS,
+  MODELS,
+} from "@/validators/option-validator";
 
 import {
   DropdownMenu,
@@ -41,9 +46,13 @@ const DesignConfigurator = ({
   const [options, setOptions] = useState<{
     color: (typeof COLORS)[number];
     model: (typeof MODELS.options)[number];
+    material: (typeof MATERIALS.options)[number];
+    finish: (typeof FINISHES.options)[number];
   }>({
     color: COLORS[0],
     model: MODELS.options[MODELS.options.length - 1],
+    material: MATERIALS.options[0],
+    finish: FINISHES.options[0],
   });
   return (
     <>
@@ -97,8 +106,8 @@ const DesignConfigurator = ({
           </Rnd>
         </div>
 
-        <div className="h-[37.5rem] w-full col-span-full lg:col-span-1 flex flex-col bg-white">
-          <ScrollArea className="relative flex-1 overflow-auto">
+        <div className="h-[37.5rem] w-full col-span-full lg:col-span-1 flex flex-col ">
+          <ScrollArea className="relative flex-1 -mr-10 lg:-mr-10 overflow-auto">
             <div
               aria-hidden="true"
               className="absolute z-10 inset-x-0 bottom-0 h-12 bg-gradient-to-t from-white pointer-events-none"
@@ -108,20 +117,21 @@ const DesignConfigurator = ({
               <h2 className="tracking-tight font-bold text-3xl">
                 Customize your case
               </h2>
-              <Separator className="my-6" />
 
-              <div className="relative mt-4 h-full flex flex-col justify-between ">
+              <div className="w-full h-px bg-zinc-200 my-6" />
+
+              <div className="relative mt-4 h-full flex flex-col justify-between">
                 <div className="flex flex-col gap-6">
                   <RadioGroup
                     value={options.color}
-                    onChange={(value) => {
-                      setOptions((prev) => ({ ...prev, color: value }));
+                    onChange={(val) => {
+                      setOptions((prev) => ({
+                        ...prev,
+                        color: val,
+                      }));
                     }}
                   >
-                    <Label>
-                      Color:{" "}
-                      <span className="text-black">{options.color.label}</span>
-                    </Label>
+                    <Label>Color: {options.color.label}</Label>
                     <div className="mt-3 flex items-center space-x-3">
                       {COLORS.map((color) => (
                         <RadioGroup.Option
@@ -189,6 +199,72 @@ const DesignConfigurator = ({
                       </DropdownMenuContent>
                     </DropdownMenu>
                   </div>
+
+                  {[MATERIALS, FINISHES].map(
+                    ({ name, options: selectableOptions }) => (
+                      <RadioGroup
+                        key={name}
+                        value={options[name]}
+                        onChange={(val) => {
+                          setOptions((prev) => ({
+                            ...prev,
+                            [name]: val,
+                          }));
+                        }}
+                      >
+                        <Label>
+                          {name.slice(0, 1).toUpperCase() + name.slice(1)}
+                        </Label>
+                        <div className="mt-3 space-y-4">
+                          {selectableOptions.map((option) => (
+                            <RadioGroup.Option
+                              key={option.value}
+                              value={option}
+                              className={({ active, checked }) =>
+                                cn(
+                                  "relative block cursor-pointer rounded-lg bg-white px-6 py-4 shadow-sm border-2 border-zinc-200 focus:outline-none ring-0 focus:ring-0 outline-none sm:flex sm:justify-between",
+                                  {
+                                    "border-primary": active || checked,
+                                  }
+                                )
+                              }
+                            >
+                              <span className="flex items-center">
+                                <span className="flex flex-col text-sm">
+                                  <RadioGroup.Label
+                                    className="font-medium text-gray-900"
+                                    as="span"
+                                  >
+                                    {option.label}
+                                  </RadioGroup.Label>
+
+                                  {option.description ? (
+                                    <RadioGroup.Description
+                                      as="span"
+                                      className="text-gray-500"
+                                    >
+                                      <span className="block sm:inline">
+                                        {option.description}
+                                      </span>
+                                    </RadioGroup.Description>
+                                  ) : null}
+                                </span>
+                              </span>
+
+                              <RadioGroup.Description
+                                as="span"
+                                className="mt-2 flex text-sm sm:ml-4 sm:mt-0 sm:flex-col sm:text-right"
+                              >
+                                <span className="font-medium text-gray-900">
+                                  {/* {formatPrice(option.price / 100)} */} 100
+                                </span>
+                              </RadioGroup.Description>
+                            </RadioGroup.Option>
+                          ))}
+                        </div>
+                      </RadioGroup>
+                    )
+                  )}
                 </div>
               </div>
             </div>
