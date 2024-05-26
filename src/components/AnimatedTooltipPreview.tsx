@@ -10,9 +10,9 @@ const people = [
   },
   {
     id: 2,
-    name: "Jane Sharma",
-    designation: "Product Manager",
-    image: "/users/user-2.png",
+    name:  "Aniket Yadav",
+    designation: "Lord  Hanuman😂",
+    image: "/duggu.jpg",
   },
   {
     id: 3,
