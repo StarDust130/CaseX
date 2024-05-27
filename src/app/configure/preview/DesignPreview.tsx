@@ -14,14 +14,14 @@ import { createCheckoutSession } from "./actions";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/components/ui/use-toast";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
-// import LoginModal from "@/components/LoginModal";a
+// import LoginModal from "@/components/LoginModal";
 
 const DesignPreview = ({ configuration }: { configuration: Configuration }) => {
   const router = useRouter();
-  const { toast } = useToast();
+  const { toast } = useToast(); 
   const { id } = configuration;
   const { user } = useKindeBrowserClient();
-  const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false);
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false); 
 
   const [showConfetti, setShowConfetti] = useState<boolean>(false);
   useEffect(() => setShowConfetti(true), []);
@@ -77,7 +77,7 @@ const DesignPreview = ({ configuration }: { configuration: Configuration }) => {
       >
         <Confetti
           active={showConfetti}
-          config={{ elementCount: 200, spread: 90 }}
+          config={{ elementCount: 200, spread: 180 }}
         />
       </div>
 
