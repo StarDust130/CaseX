@@ -79,9 +79,8 @@ const config: Config = {
           "50%": { transform: "translateY(0)", opacity: "1" },
         },
         flashing: {
-          "0% , 100%": { opacity: "0.2" },
+          "0%, 100%": { opacity: "0.2" },
           "20%": { opacity: "1" },
-          
         },
       },
       animation: {
