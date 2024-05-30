@@ -166,7 +166,7 @@ const DesignPreview = ({ configuration }: { configuration: Configuration }) => {
                 </div>
               </div>
             </div>
-
+  
             <div className="mt-8 flex justify-end pb-12">
               <Button
                 onClick={() => handleCheckout()}
