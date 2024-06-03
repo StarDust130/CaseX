@@ -35,7 +35,7 @@ enum CaseFinish {
 enum CaseColor {
   black
   blue
-  pink 
+  pink
   orange
   yellow
   rose
@@ -51,5 +51,21 @@ model Configuration {
   material        CaseMaterial?
   finish          CaseFinish?
   croppedImageUrl String?
+  Order           Order[]
 }
 
+model User {
+  id    String  @id @default(cuid())
+  email String
+  Order Order[]
+
+  createdAt DateTime @default(now())
+}
+
+model Order {
+  id              String        @id @default(cuid())
+  configurationId String
+  configuration   Configuration @relation(fields: [configurationId], references: [id])
+  user            User          @relation(fields: [userId], references: [id])
+  userId          String
+}
